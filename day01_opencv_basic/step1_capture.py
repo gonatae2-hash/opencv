@@ -25,7 +25,7 @@ while True:
     if key == ord('q'):
         break
     elif key == ord('c'):
-        filename = f"my_photo{count}.jpg"
+        filename = f"my_photo{count}.png"
         cv.imwrite(filename, frame)
         count += 1
 
