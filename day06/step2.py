@@ -39,10 +39,15 @@ for method_name in methods:
         score = max_val
     
     results.append((method_name, score, top_left))
-    
-    # 결과 출력
+
+    #결과 출력
     print(f"{method_name:15} → score={score:.4f}, top_left={top_left}")
 
-# 최고 점수 방법 표시
-best_method, best_score, best_loc = max(results, key=lambda x: x[1] if 'SQDIFF' not in x[0] else -x[1])
+# 위치가 맞는 것만 비교(20,80)
+correct_loc = (20, 80)
+# 정규화된 값들만 선택 (TM_CCOEFF,TM_CCORR= 값이 너무 커서 최고 성능으로 선택되기 때문에)
+filtered = [r for r in results if 'NORMED' in r[0]]
+
+best_method, best_score, best_loc = max( filtered, key=lambda x: x[1] if 'SQDIFF' not in x[0] else -x[1] )
+
 print(f"\n최고 성능: {best_method} (score={best_score:.4f})")
